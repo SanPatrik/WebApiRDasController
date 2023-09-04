@@ -1,0 +1,52 @@
+﻿openapi: 3.0.3
+info:
+  title: R-DAS | C# interview task
+  description: ""
+  contact:
+    email: develop@r-das.sk.io
+  license:
+    name: Property of R-DAS, s.r.o. Any unauthorized distribution of the document is prohibited.
+  version: 1.0.0
+paths:
+  /service/data:
+    post:
+      tags:
+        - devices
+      summary: Accept data from devices
+      description: Accept and process data from devices
+      requestBody: 
+        description: binary data
+        content:
+          text/plain:
+            schema:
+                type: string
+      responses:  
+        200:
+          description: OK
+        400:
+          description: Unknown format
+  /api/data:
+    get:
+      tags:
+        - api
+      summary: Get received data
+      description: Get received messages from devices
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  type: object
+                  properties:
+                    identifier: 
+                      type: integer
+                      example: 35
+                    state:
+                      type: integer
+                      example: 1
+                    ipAddress:
+                      type: string
+                      format: ipv4
